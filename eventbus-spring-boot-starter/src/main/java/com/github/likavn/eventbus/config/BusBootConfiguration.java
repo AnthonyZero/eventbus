@@ -26,10 +26,8 @@ import com.github.likavn.eventbus.core.base.NodeTestConnect;
 import com.github.likavn.eventbus.core.metadata.BusConfig;
 import com.github.likavn.eventbus.core.metadata.InterceptorConfig;
 import com.github.likavn.eventbus.prop.BusProperties;
-import com.github.likavn.eventbus.provider.pulsar.BusBootPulsarConfiguration;
-import com.github.likavn.eventbus.provider.rabbit.config.BusBootRabbitConfiguration;
+import com.github.likavn.eventbus.provider.kafka.BusBootKafkaConfiguration;
 import com.github.likavn.eventbus.provider.redis.config.BusBootRedisConfiguration;
-import com.github.likavn.eventbus.provider.rocket.config.BusBootRocketConfiguration;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
@@ -56,8 +54,7 @@ import java.util.Map;
 @Slf4j
 @Configuration
 @EnableConfigurationProperties(BusProperties.class)
-@ImportAutoConfiguration({BusBootRabbitConfiguration.class,
-        BusBootRedisConfiguration.class, BusBootRocketConfiguration.class, BusBootPulsarConfiguration.class})
+@ImportAutoConfiguration({BusBootRedisConfiguration.class,  BusBootKafkaConfiguration.class})
 @ConditionalOnProperty(prefix = "eventbus", name = "enable", havingValue = "true", matchIfMissing = true)
 public class BusBootConfiguration {
 

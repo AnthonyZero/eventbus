@@ -13,37 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.likavn.eventbus.provider.rocket.constant;
+package com.github.likavn.eventbus.provider.kafka;
+
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Configuration;
 
 /**
- * rocketmq常量
+ * pulsar实现配置
  *
  * @author likavn
  * @date 2024/01/01
- * @since 2.2
  */
-public class RocketConstant {
-    private RocketConstant() {
-    }
+@Configuration
+@ConditionalOnClass(RabbitTemplate.class)
+@ConditionalOnProperty(prefix = "eventbus", name = "type", havingValue = "kafka")
+public class BusBootKafkaConfiguration {
 
-    /**
-     * 前缀
-     */
-    private static final String SUFFIX = "eventbus_";
-
-    /**
-     * rabbitMq队列key+TAG
-     * 参数：
-     * <p>
-     * 1.Topic;
-     */
-    public static final String QUEUE = SUFFIX + "queue_%s";
-
-    /**
-     * 延时队列名+TAG
-     * 参数：
-     * <p>
-     * 1.Topic;
-     */
-    public static final String DELAY_QUEUE = SUFFIX + "delayQueue_%s";
 }
